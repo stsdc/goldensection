@@ -34,8 +34,9 @@ class Welcome(Gtk.Box):
     # Define variable for GTK global theme
     settings = Gtk.Settings.get_default()
 
-    def __init__(self):
+    def __init__(self, parent):
         Gtk.Box.__init__(self, False, 0)
+        self.parent = parent
 
         try:
             current_locale, encoding = locale.getdefaultlocale()

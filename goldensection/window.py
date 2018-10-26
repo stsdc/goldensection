@@ -19,7 +19,7 @@
 '''
 import constants as cn
 import headerbar as hb
-import welcome as wl
+import stack as sk
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -34,6 +34,5 @@ class Window(Gtk.Window):
         hbar = hb.Headerbar()
         self.set_titlebar(hbar)
 
-        self.welcome = wl.Welcome()
-
-        self.add(self.welcome)
+        self.stack = sk.Stack(self)
+        self.add(self.stack)
