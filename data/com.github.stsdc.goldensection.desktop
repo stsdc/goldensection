@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Elementary Python
+GenericName=goldensection
+Comment=This is just a python template
+Categories=Development;
+Exec=com.github.stsdc.goldensection
+Icon=com.github.stsdc.goldensection
+Terminal=false
+Type=Application
+X-GNOME-Gettext-Domain=com.github.stsdc.goldensection
+Keywords=Python;
