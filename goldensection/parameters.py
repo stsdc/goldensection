@@ -33,10 +33,9 @@ class Parameters:
 
     def on_activate_a(self, widget):
         self.function.update(widget.get_text(), 0, 0)
-        print(widget.get_text())
 
     def on_activate_b(self, widget):
-        print(widget.get_text())
+        self.function.update(0, widget.get_text(), 0)
 
     def on_activate_c(self, widget):
-        print(widget.get_text())
+        self.function.update(0, 0, widget.get_text())
