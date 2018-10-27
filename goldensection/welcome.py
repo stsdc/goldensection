@@ -63,6 +63,7 @@ class Welcome(Gtk.Box):
             # Use GTK Dark theme
             print("Start plot window etc")
             self.parent.stack.set_visible_child_name("new_search")
+
         elif index == 1:
             # Open webpage
             webbrowser.open_new_tab("https://en.wikipedia.org/wiki/Golden-section_search")
