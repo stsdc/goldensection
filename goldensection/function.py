@@ -15,6 +15,8 @@ class Function:
 
         self.update(self.param_a, self.param_b, self.param_c)
 
+        self.f = lambda x: self.param_a*x*x + self.param_b*x + self.param_c
+
 
     def update(self, param_A, param_B, param_C):
         print (param_A, param_B, param_C)
@@ -22,14 +24,17 @@ class Function:
         if(param_A):
             self.param_a = param_A
             self.label.set_label(self.label_builder(param_A, self.param_b, self.param_c))
+            self.set_func()
 
         if(param_B):
             self.param_b = param_B
             self.label.set_label(self.label_builder(self.param_a, param_B, self.param_c))
+            self.set_func()
 
         if(param_C):
             self.param_c = param_C
             self.label.set_label(self.label_builder(self.param_a, self.param_b, param_C))
+            self.set_func()
 
 
     def label_builder(self, param_A, param_B, param_C):
@@ -54,3 +59,7 @@ class Function:
         else:
             label = label + str(param_C)
         return label
+
+    def set_func(self):
+        self.f = lambda x: self.param_a*x*x + self.param_b*x + self.param_c
+        print(self.f)
