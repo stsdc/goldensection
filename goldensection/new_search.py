@@ -29,6 +29,8 @@ from gi.repository import Gtk, Gdk, Granite, GdkPixbuf
 try:
     import constants as cn
     import chart as ch
+    import parameters as pm
+    import function as fn
 except ImportError:
     import bottles.constants as cn
 
@@ -47,16 +49,19 @@ class NewSearch(Gtk.Box):
         except FileNotFoundError:
             _ = str
 
-        self.set_border_width(1)
         chart = ch.Chart()
+        algo_parameters = pm.Parameters()
+        function_label = fn.Function()
         hpaned = Gtk.Paned()
         hpaned.set_position(800)
-
         hpaned.add1(chart.sw)
 
-        label = Gtk.Label(label="Right Pane")
-        hpaned.add2(label)
+        vbox = Gtk.VBox()
+        vbox.add(algo_parameters.frame)
+        vbox.add(function_label.frame)
+
+        function_label.update(param_A=1, param_B=1, param_C=1)
+
+        hpaned.add2(vbox)
 
         self.pack_start(hpaned, True, True, 0)
-
-        print(parent.get_preferred_width())
