@@ -51,27 +51,23 @@ class NewSearch(Gtk.Box):
 
         self.set_border_width(1)
 
-        # f = Figure(figsize=(5, 4), dpi=100)
-        # a = f.add_subplot(111)
-        # t = np.arange(0.0, 3.0, 0.01)
-        # s = np.sin(2*np.pi*t)
-        # a.plot(t, s)
-        #
-        # sw = Gtk.ScrolledWindow()
-        # self.add(sw)
-        # # A scrolled window border goes outside the scrollbars and viewport
-        # canvas = FigureCanvas(f)  # a Gtk.DrawingArea
-        # canvas.set_size_request(800, 600)
-        # sw.add_with_viewport(canvas)
-        # self.grid = grid = Gtk.Grid()
+        f = Figure(figsize=(5, 4), dpi=100)
+        a = f.add_subplot(111)
+        t = np.arange(0.0, 3.0, 0.01)
+        s = np.sin(2*np.pi*t)
+        a.plot(t, s)
+
+        sw = Gtk.ScrolledWindow()
+        # A scrolled window border goes outside the scrollbars and viewport
+        canvas = FigureCanvas(f)  # a Gtk.DrawingArea
+        canvas.set_size_request(800, 600)
+        sw.add_with_viewport(canvas)
 
         hpaned = Gtk.Paned()
         hpaned.set_position(300)
 
-        label = Gtk.Label(label="Left Pane")
-        hpaned.add1(label)
+        hpaned.add1(sw)
 
-        label = Gtk.Label(label="Right Pane")
         hpaned.add2(label)
 
         self.pack_start(hpaned, True, True, 0)
