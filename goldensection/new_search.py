@@ -25,20 +25,17 @@ import gettext
 import webbrowser
 gi.require_version('Gtk', '3.0')
 gi.require_version('Granite', '1.0')
-from gi.repository import Gtk, Gdk, Granite
+from gi.repository import Gtk, Gdk, Granite, GdkPixbuf
 try:
     import constants as cn
-    import welcome as wl
-    import new_search as ns
 except ImportError:
-    import goldensection.constants as cn
-    import goldensection.welcome as wl
-    import goldensection.new_search as ns
+    import bottles.constants as cn
 
-class Stack(Gtk.Box):
+class NewSearch(Gtk.Box):
+    status = False
 
     def __init__(self, parent):
-        Gtk.Box.__init__(self, orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        Gtk.Box.__init__(self, False, 0)
         self.parent = parent
 
         try:
@@ -49,16 +46,6 @@ class Stack(Gtk.Box):
         except FileNotFoundError:
             _ = str
 
-
-        self.stack = Gtk.Stack()
-        self.stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
-        self.stack.set_transition_duration(200)
-
-        self.welcome = wl.Welcome(self)
-        self.new_search = ns.NewSearch(self)
-
-
-        self.stack.add_titled(self.welcome, "welcome", _('Welcome'))
-        self.stack.add_titled(self.new_search, "new_search", _('New search'))
-
-        self.pack_start(self.stack, True, True, 0)
+        self.set_border_width(80)
+        #win.resize(800,400)
+        self.set_orientation(Gtk.Orientation.VERTICAL)

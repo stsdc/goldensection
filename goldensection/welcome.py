@@ -51,7 +51,7 @@ class Welcome(Gtk.Box):
         welcome = welcome.new("Welcome", cn.App.application_description)
 
         # Welcome voices
-        welcome.append("object-inverse", _('Find min of function'), _('Use Golden Section Algorithm'))
+        welcome.append("object-inverse", _('New search'), _('Find min of function'))
         welcome.append("help-contents", _('What is the Golden Section Algorithm'), _('Learn more about this algorithm'))
 
         welcome.connect("activated", self.on_welcome_activated)
@@ -62,6 +62,7 @@ class Welcome(Gtk.Box):
         if index == 0:
             # Use GTK Dark theme
             print("Start plot window etc")
+            self.parent.stack.set_visible_child_name("new_search")
         elif index == 1:
             # Open webpage
             webbrowser.open_new_tab("https://en.wikipedia.org/wiki/Golden-section_search")
