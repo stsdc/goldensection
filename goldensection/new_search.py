@@ -28,6 +28,9 @@ gi.require_version('Granite', '1.0')
 from gi.repository import Gtk, Gdk, Granite, GdkPixbuf
 try:
     import constants as cn
+    from matplotlib.backends.backend_gtk3agg import (FigureCanvasGTK3Agg as FigureCanvas)
+    from matplotlib.figure import Figure
+    import numpy as np
 except ImportError:
     import bottles.constants as cn
 
@@ -46,6 +49,29 @@ class NewSearch(Gtk.Box):
         except FileNotFoundError:
             _ = str
 
-        self.set_border_width(80)
-        #win.resize(800,400)
-        self.set_orientation(Gtk.Orientation.VERTICAL)
+        self.set_border_width(1)
+
+        # f = Figure(figsize=(5, 4), dpi=100)
+        # a = f.add_subplot(111)
+        # t = np.arange(0.0, 3.0, 0.01)
+        # s = np.sin(2*np.pi*t)
+        # a.plot(t, s)
+        #
+        # sw = Gtk.ScrolledWindow()
+        # self.add(sw)
+        # # A scrolled window border goes outside the scrollbars and viewport
+        # canvas = FigureCanvas(f)  # a Gtk.DrawingArea
+        # canvas.set_size_request(800, 600)
+        # sw.add_with_viewport(canvas)
+        # self.grid = grid = Gtk.Grid()
+
+        hpaned = Gtk.Paned()
+        hpaned.set_position(300)
+
+        label = Gtk.Label(label="Left Pane")
+        hpaned.add1(label)
+
+        label = Gtk.Label(label="Right Pane")
+        hpaned.add2(label)
+
+        self.pack_start(hpaned, True, True, 0)
