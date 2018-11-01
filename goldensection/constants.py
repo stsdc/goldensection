@@ -36,7 +36,7 @@ class App:
     application_shortname = "goldensection"
     application_id = "com.github.stsdc.goldensection"
     application_name = "Golden Section Algorithm"
-    application_description = _('Display result of Golden Section Algorithm')
+    application_description = _('Visualize Golden Section Algorithm')
     application_version ="0.1"
     app_years = "2018"
     main_url = "https://github.com/stsdc/goldensection"
