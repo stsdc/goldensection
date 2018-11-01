@@ -39,9 +39,9 @@ class Headerbar(Gtk.HeaderBar):
         self.hbar_help.set_icon_name("help-contents")
         self.hbar_help.connect("clicked", self.on_hbar_help_clicked)
         self.pack_end(self.hbar_help)
-        
+
         # color button
-        self.hbar_color = Gtk.ColorButton.new_with_rgba(Gdk.RGBA(222, 222, 222, 255))
+        self.hbar_color = Gtk.ColorButton.new_with_rgba(Gdk.RGBA(255, 215, 0, 255))
         self.hbar_color.connect("color_set", self.on_hbar_color_color_set)
         self.pack_end(self.hbar_color)
 
