@@ -6,8 +6,7 @@ from gi.repository import Gtk, Gdk, Granite, GdkPixbuf
 class Chart:
     def __init__(self):
         self.figure = Figure()
-        self.title="something"
-        self.subplot = self.figure.add_subplot(111, ylabel="f(x)", xlabel="x", title=self.title)
+        self.subplot = self.figure.add_subplot(111, ylabel="f(x)", xlabel="x", title="function")
         self.x = []
         self.y = []
 
@@ -20,8 +19,13 @@ class Chart:
     def update(self, function):
         self.del_points()
         self.subplot.clear()
+        self.subplot.axhline(0, color='#d4d4d4', linestyle='--')
+        self.subplot.axvline(0, color='#d4d4d4', linestyle='--')
         self.generate_points(function)
         self.subplot.plot(self.x, self.y)
+        self.subplot.set_ylabel("f(x)")
+        self.subplot.set_xlabel("x")
+
 
     def generate_points(self, f):
         for x in range(-50,50,1):
