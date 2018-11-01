@@ -5,15 +5,29 @@ from gi.repository import Gtk, Gdk, Granite, GdkPixbuf
 
 class Chart:
     def __init__(self):
-        figure = Figure()
-        subplot = figure.add_subplot(111, ylabel="f(x)", xlabel="x", title="Some func")
-        t = np.arange(0.0, 3.0, 0.01)
-        s = np.sin(2*np.pi*t)
-
-        subplot.plot(t, s)
+        self.figure = Figure()
+        self.title="something"
+        self.subplot = self.figure.add_subplot(111, ylabel="f(x)", xlabel="x", title=self.title)
+        self.x = []
+        self.y = []
 
         self.sw = Gtk.ScrolledWindow()
         # A scrolled window border goes outside the scrollbars and viewport
-        canvas = FigureCanvas(figure)  # a Gtk.DrawingArea
+        canvas = FigureCanvas(self.figure)  # a Gtk.DrawingArea
         # canvas.set_size_request(800, 600)
         self.sw.add_with_viewport(canvas)
+
+    def update(self, function):
+        self.del_points()
+        self.subplot.clear()
+        self.generate_points(function)
+        self.subplot.plot(self.x, self.y)
+
+    def generate_points(self, f):
+        for x in range(-50,50,1):
+            self.x.append(x)
+            self.y.append(f(x))
+
+    def del_points(self):
+        self.x = []
+        self.y = []

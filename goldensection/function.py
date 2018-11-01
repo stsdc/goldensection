@@ -2,16 +2,19 @@ from gi.repository import Gtk, Gdk, Granite, GdkPixbuf
 
 
 class Function:
-    def __init__(self):
+    def __init__(self, chart):
         self.label = Gtk.Label()
+        self.label_text = ""
+
+        self.chart = chart
 
         self.frame = Gtk.Frame(margin=20)
         self.frame.set_label("The function")
         self.frame.add(self.label)
 
-        self.param_a = 1
+        self.param_a = -4
         self.param_b = 2
-        self.param_c = 3
+        self.param_c = 6
 
         self.update(self.param_a, self.param_b, self.param_c)
 
@@ -22,19 +25,25 @@ class Function:
         print (param_A, param_B, param_C)
 
         if(param_A):
-            self.param_a = param_A
-            self.label.set_label(self.label_builder(param_A, self.param_b, self.param_c))
+            self.param_a = int(param_A)
+            self.label_builder(param_A, self.param_b, self.param_c)
+            self.label.set_label(self.label_text)
             self.set_func()
 
         if(param_B):
-            self.param_b = param_B
-            self.label.set_label(self.label_builder(self.param_a, param_B, self.param_c))
+            self.param_b = int(param_B)
+            self.label_builder(self.param_a, param_B, self.param_c)
+            self.label.set_label(self.label_text)
             self.set_func()
 
         if(param_C):
-            self.param_c = param_C
-            self.label.set_label(self.label_builder(self.param_a, self.param_b, param_C))
+            self.param_c = int(param_C)
+            self.label_builder(self.param_a, self.param_b, param_C)
+            self.label.set_label(self.label_text)
             self.set_func()
+
+        self.chart.update(self.f)
+        self.chart.subplot.set_title(self.label_text)
 
 
     def label_builder(self, param_A, param_B, param_C):
@@ -58,8 +67,7 @@ class Function:
             pass
         else:
             label = label + str(param_C)
-        return label
+        self.label_text = label
 
     def set_func(self):
         self.f = lambda x: self.param_a*x*x + self.param_b*x + self.param_c
-        print(self.f)

@@ -50,15 +50,15 @@ class NewSearch(Gtk.Box):
             _ = str
 
         chart = ch.Chart()
-        function_label = fn.Function()
-        algo_parameters = pm.Parameters(function_label)
+        function = fn.Function(chart)
+        algo_parameters = pm.Parameters(function)
         hpaned = Gtk.Paned()
         hpaned.set_position(800)
         hpaned.add1(chart.sw)
 
         vbox = Gtk.VBox()
         vbox.add(algo_parameters.frame)
-        vbox.add(function_label.frame)
+        vbox.add(function.frame)
 
 
 
