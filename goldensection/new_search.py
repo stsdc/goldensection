@@ -31,6 +31,7 @@ try:
     import chart as ch
     import parameters as pm
     import function as fn
+    import algorithm as al
 except ImportError:
     import bottles.constants as cn
 
@@ -51,7 +52,8 @@ class NewSearch(Gtk.Box):
 
         chart = ch.Chart()
         function = fn.Function(chart)
-        algo_parameters = pm.Parameters(function)
+        algo = al.Algorithm()
+        algo_parameters = pm.Parameters(function, algo)
         hpaned = Gtk.Paned()
         hpaned.set_position(800)
         hpaned.add1(chart.sw)

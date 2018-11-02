@@ -28,7 +28,7 @@ class Chart:
 
 
     def generate_points(self, f):
-        for x in range(-50,50,1):
+        for x in range(-10,10,1):
             self.x.append(x)
             self.y.append(f(x))
 

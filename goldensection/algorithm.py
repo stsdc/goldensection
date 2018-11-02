@@ -24,7 +24,7 @@ class Algorithm:
             self.c = self.d
             self.d = self.a + (self.b - self.a) / self.golden
 
-    def get_min(self):
+    def find_min(self):
         while (abs(self.b - self.a) > self.tolerance):
             self.step()
         return (self.d, self.c)
