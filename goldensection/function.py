@@ -39,8 +39,7 @@ class Function:
 
         self.label.set_label(self.label_text)
         self.set_func()
-        self.chart.update(self.f)
-        self.chart.subplot.set_title(self.label_text)
+        self.chart.update(self)
         print("Extrema:", -self.param_b / (2 * self.param_a))
 
 
@@ -56,7 +55,7 @@ class Function:
             label = label + str(param_A) + "x\u00b2 + "
 
         if(param_B == "1"):
-            label = label + "x + "
+            label = label + "x "
         elif(param_B == "0"):
             pass
         else:

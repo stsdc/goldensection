@@ -9,36 +9,42 @@ class Parameters:
         param_a = Gtk.Entry(margin=5)
         param_a.set_tooltip_text("Parameter A")
         param_a.set_placeholder_text("Parameter A")
+        param_a.set_text(str(self.function.param_a))
         param_a.connect("activate", self.on_activate_a)
         param_a.connect("focus-out-event", self.on_activate_a)
 
         param_b = Gtk.Entry(margin=5)
         param_b.set_tooltip_text("Parameter B")
         param_b.set_placeholder_text("Parameter B")
+        param_b.set_text(str(self.function.param_b))
         param_b.connect("activate", self.on_activate_b)
         param_b.connect("focus-out-event", self.on_activate_b)
 
         param_c = Gtk.Entry(margin=5)
         param_c.set_tooltip_text("Parameter C")
         param_c.set_placeholder_text("Parameter C")
+        param_c.set_text(str(self.function.param_c))
         param_c.connect("activate", self.on_activate_c)
         param_c.connect("focus-out-event", self.on_activate_c)
 
         constrain_a = Gtk.Entry(margin=5)
         constrain_a.set_tooltip_text("Constrain a")
         constrain_a.set_placeholder_text("Constrain a")
+        constrain_a.set_text(str(self.algorithm.a))
         constrain_a.connect("activate", self.on_activate_constrain_a)
         constrain_a.connect("focus-out-event", self.on_activate_constrain_a)
 
         constrain_b = Gtk.Entry(margin=5)
         constrain_b.set_tooltip_text("Constrain b")
         constrain_b.set_placeholder_text("Constrain b")
+        constrain_b.set_text(str(self.algorithm.b))
         constrain_b.connect("activate", self.on_activate_constrain_b)
         constrain_b.connect("focus-out-event", self.on_activate_constrain_b)
 
         tolerance = Gtk.Entry(margin=5)
         tolerance.set_tooltip_text("Tolerance")
         tolerance.set_placeholder_text("Tolerance")
+        tolerance.set_text(str(self.algorithm.tolerance))
         tolerance.connect("activate", self.on_activate_tolerance)
         tolerance.connect("focus-out-event", self.on_activate_tolerance)
 
@@ -90,4 +96,4 @@ class Parameters:
     def on_activate_tolerance(self, widget, event=None):
         self.algorithm.tolerance = float(widget.get_text())
         self.algorithm.f = self.function.f
-        print(self.algorithm.find_min())
+        print(self.algorithm.c, self.algorithm.d)

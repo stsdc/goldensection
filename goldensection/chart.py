@@ -17,11 +17,13 @@ class Chart:
         self.sw.add_with_viewport(canvas)
 
     def update(self, function):
+        print("CHART")
         self.del_points()
         self.subplot.clear()
         self.subplot.axhline(0, color='#d4d4d4', linestyle='--')
         self.subplot.axvline(0, color='#d4d4d4', linestyle='--')
-        self.generate_points(function)
+        self.subplot.set_title(function.label_text)
+        self.generate_points(function.f)
         self.subplot.plot(self.x, self.y)
         self.subplot.set_ylabel("f(x)")
         self.subplot.set_xlabel("x")
