@@ -25,6 +25,7 @@ class Chart:
         self.subplot.set_title(function.label_text)
         self.generate_points(function.f)
         self.subplot.plot(self.x, self.y)
+        self.figure.canvas.draw()
         self.subplot.set_ylabel("f(x)")
         self.subplot.set_xlabel("x")
 
