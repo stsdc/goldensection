@@ -34,19 +34,11 @@ class Headerbar(Gtk.HeaderBar):
         self.set_show_close_button(True)
         self.props.title = cn.App.application_name
 
-        # help button
-        self.hbar_help = Gtk.ToolButton()
-        self.hbar_help.set_icon_name("help-contents")
-        self.hbar_help.connect("clicked", self.on_hbar_help_clicked)
-        self.pack_end(self.hbar_help)
-
         # color button
         self.hbar_color = Gtk.ColorButton.new_with_rgba(Gdk.RGBA(255, 215, 0, 255))
         self.hbar_color.connect("color_set", self.on_hbar_color_color_set)
         self.pack_end(self.hbar_color)
 
-    def on_hbar_help_clicked(self, widget):
-        webbrowser.open_new_tab("https://github.com/mirkobrombin/goldensection")
 
     def on_hbar_color_color_set(self, widget):
         cn.Colors.primary_color = widget.get_rgba().to_string()
