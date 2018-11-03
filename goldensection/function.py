@@ -12,7 +12,7 @@ class Function:
         self.frame.set_label("The function")
         self.frame.add(self.label)
 
-        self.param_a = -4
+        self.param_a = 4
         self.param_b = 2
         self.param_c = 6
 

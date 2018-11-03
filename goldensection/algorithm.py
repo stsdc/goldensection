@@ -11,7 +11,7 @@ class Algorithm:
         self.c = self.b - (self.b - self.a) / self.golden
         self.d = self.a + (self.b - self.a) / self.golden
 
-        self.f = lambda x: x*x + x + 1
+        self.f = lambda x: 4*x*x + 2*x + 6
 
 
     def step(self):
@@ -25,6 +25,9 @@ class Algorithm:
             self.d = self.a + (self.b - self.a) / self.golden
 
     def find_min(self):
+        self.c = self.b - (self.b - self.a) / self.golden
+        self.d = self.a + (self.b - self.a) / self.golden
         while (abs(self.b - self.a) > self.tolerance):
             self.step()
+            print(self.d, self.c)
         return (self.d, self.c)
