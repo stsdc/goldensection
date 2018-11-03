@@ -17,7 +17,7 @@ class Chart:
         self.sw.add_with_viewport(canvas)
 
     def update(self, function):
-        print("CHART")
+        print("CHART", function.param_a, function.param_b, function.param_c)
         self.del_points()
         self.subplot.clear()
         self.subplot.axhline(0, color='#d4d4d4', linestyle='--')
@@ -30,10 +30,13 @@ class Chart:
 
 
     def generate_points(self, f):
+        print("Generating points")
         for x in range(-10,10,1):
+            print("X, y", x, f(x))
             self.x.append(x)
             self.y.append(f(x))
 
     def del_points(self):
+        print("Deleting points")
         self.x = []
         self.y = []

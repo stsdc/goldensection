@@ -10,43 +10,37 @@ class Parameters:
         param_a.set_tooltip_text("Parameter A")
         param_a.set_placeholder_text("Parameter A")
         param_a.set_text(str(self.function.param_a))
-        param_a.connect("activate", self.on_activate_a)
-        param_a.connect("focus-out-event", self.on_activate_a)
+        param_a.connect("changed", self.on_activate_a)
 
         param_b = Gtk.Entry(margin=5)
         param_b.set_tooltip_text("Parameter B")
         param_b.set_placeholder_text("Parameter B")
         param_b.set_text(str(self.function.param_b))
-        param_b.connect("activate", self.on_activate_b)
-        param_b.connect("focus-out-event", self.on_activate_b)
+        param_b.connect("changed", self.on_activate_b)
 
         param_c = Gtk.Entry(margin=5)
         param_c.set_tooltip_text("Parameter C")
         param_c.set_placeholder_text("Parameter C")
         param_c.set_text(str(self.function.param_c))
-        param_c.connect("activate", self.on_activate_c)
-        param_c.connect("focus-out-event", self.on_activate_c)
+        param_c.connect("changed", self.on_activate_c)
 
         self.constrain_a = Gtk.Entry(margin=5)
         self.constrain_a.set_tooltip_text("Constrain a")
         self.constrain_a.set_placeholder_text("Constrain a")
         self.constrain_a.set_text(str(self.algorithm.a))
-        self.constrain_a.connect("activate", self.on_activate_constrain_a)
-        self.constrain_a.connect("focus-out-event", self.on_activate_constrain_a)
+        self.constrain_a.connect("changed", self.on_activate_constrain_a)
 
         self.constrain_b = Gtk.Entry(margin=5)
         self.constrain_b.set_tooltip_text("Constrain b")
         self.constrain_b.set_placeholder_text("Constrain b")
         self.constrain_b.set_text(str(self.algorithm.b))
-        self.constrain_b.connect("activate", self.on_activate_constrain_b)
-        self.constrain_b.connect("focus-out-event", self.on_activate_constrain_b)
+        self.constrain_b.connect("changed", self.on_activate_constrain_b)
 
         tolerance = Gtk.Entry(margin=5)
         tolerance.set_tooltip_text("Tolerance")
         tolerance.set_placeholder_text("Tolerance")
         tolerance.set_text(str(self.algorithm.tolerance))
-        tolerance.connect("activate", self.on_activate_tolerance)
-        tolerance.connect("focus-out-event", self.on_activate_tolerance)
+        tolerance.connect("changed", self.on_activate_tolerance)
 
         param_grid = Gtk.Grid()
         param_grid.attach(param_a, 0, 0, 1, 1)
@@ -74,12 +68,13 @@ class Parameters:
         self.recalculate()
 
     def on_activate_constrain_a(self, widget, event=None):
-        self.algorithm.a = float(widget.get_text())
+        self.algorithm.a = self.to_float(widget.get_text())
         self.recalculate()
 
 
     def on_activate_constrain_b(self, widget, event=None):
-        self.algorithm.b = float(widget.get_text())
+        self.algorithm.b = self.to_float(widget.get_text())
+        self.recalculate()
 
 
     def on_activate_tolerance(self, widget, event=None):
@@ -88,7 +83,13 @@ class Parameters:
 
 
     def recalculate(self):
-        self.algorithm.a = float(self.constrain_a.get_text())
-        self.algorithm.b = float(self.constrain_b.get_text())
+        self.algorithm.a = self.to_float(self.constrain_a.get_text())
+        self.algorithm.b = self.to_float(self.constrain_b.get_text())
         self.algorithm.find_min()
         self.algorithm.f = self.function.f
+
+    def to_float(self, string):
+        if not string or (not string.isdigit()):
+            return 0.0
+        else:
+            return float(string)

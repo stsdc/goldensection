@@ -3,7 +3,7 @@ import math
 class Algorithm:
     def __init__(self):
         self.golden  = (math.sqrt(5.0) + 1.0)/2
-        self.tolerance = 0.1
+        self.tolerance = 0.01
 
         self.a = -5
         self.b = 5
@@ -24,10 +24,13 @@ class Algorithm:
             self.c = self.d
             self.d = self.a + (self.b - self.a) / self.golden
 
+        print(self.d, self.c)
+
+
     def find_min(self):
         self.c = self.b - (self.b - self.a) / self.golden
         self.d = self.a + (self.b - self.a) / self.golden
-        while (abs(self.b - self.a) > self.tolerance):
-            self.step()
-            print(self.d, self.c)
-        return (self.d, self.c)
+        if(self.tolerance > 0):
+            while (abs(self.b - self.a) > self.tolerance):
+                self.step()
+            return (self.d, self.c)

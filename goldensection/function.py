@@ -16,10 +16,9 @@ class Function:
         self.param_b = 2
         self.param_c = 6
 
-        self.update(self.param_a, self.param_b, self.param_c)
-
         self.f = lambda x: self.param_a*x*x + self.param_b*x + self.param_c
 
+        self.update(self.param_a, self.param_b, self.param_c)
 
 
     def update(self, param_A, param_B, param_C):
