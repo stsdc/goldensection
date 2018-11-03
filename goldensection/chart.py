@@ -10,7 +10,7 @@ class Chart:
         self.x = []
         self.y = []
 
-        self.color = (0.20392156862745098, 0.396078431372549, 0.6431372549019608)
+        self.color = (0.9294117647058824, 0.8313725490196079, 0.0)
 
         self.sw = Gtk.ScrolledWindow()
         # A scrolled window border goes outside the scrollbars and viewport

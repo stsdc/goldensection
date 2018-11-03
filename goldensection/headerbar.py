@@ -36,7 +36,7 @@ class Headerbar(Gtk.HeaderBar):
         self.props.title = cn.App.application_name
 
         # color button
-        self.hbar_color = Gtk.ColorButton.new_with_rgba(Gdk.RGBA(0.20392156862745098, 0.396078431372549, 0.6431372549019608, 1))
+        self.hbar_color = Gtk.ColorButton.new_with_rgba(Gdk.RGBA(0.9294117647058824, 0.8313725490196079, 0.0, 1))
         print("Default color", self.hbar_color.get_rgba().to_string())
         self.hbar_color.connect("color_set", self.on_hbar_color_color_set)
         self.pack_end(self.hbar_color)
