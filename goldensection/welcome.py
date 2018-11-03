@@ -51,7 +51,7 @@ class Welcome(Gtk.Box):
         welcome = welcome.new("Welcome", cn.App.application_description)
 
         # Welcome voices
-        welcome.append("object-inverse", _('New search'), _('Find min of function'))
+        welcome.append("system-search-symbolic", _('New search'), _('Find min of function'))
         welcome.append("help-contents", _('What is the Golden Section Algorithm'), _('Learn more about this algorithm'))
 
         welcome.connect("activated", self.on_welcome_activated)
