@@ -32,9 +32,9 @@ class Chart:
         self.subplot.set_title(function.label_text)
         self.generate_points(function.f)
         self.subplot.plot(self.x, self.y, color=self.color)
-        self.figure.canvas.draw()
         self.subplot.set_ylabel("f(x)")
         self.subplot.set_xlabel("x")
+        self.figure.canvas.draw()
 
 
     def generate_points(self, f):
