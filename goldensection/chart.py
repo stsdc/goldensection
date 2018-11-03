@@ -10,21 +10,28 @@ class Chart:
         self.x = []
         self.y = []
 
+        self.color = (0.20392156862745098, 0.396078431372549, 0.6431372549019608)
+
         self.sw = Gtk.ScrolledWindow()
         # A scrolled window border goes outside the scrollbars and viewport
         canvas = FigureCanvas(self.figure)  # a Gtk.DrawingArea
         # canvas.set_size_request(800, 600)
         self.sw.add_with_viewport(canvas)
 
+        self.f = None
+
     def update(self, function):
-        print("CHART", function.param_a, function.param_b, function.param_c)
+        self.f = function
+        if not function:
+            function = self.f
+        print("CHART", self.color)
         self.del_points()
         self.subplot.clear()
         self.subplot.axhline(0, color='#d4d4d4', linestyle='--')
         self.subplot.axvline(0, color='#d4d4d4', linestyle='--')
         self.subplot.set_title(function.label_text)
         self.generate_points(function.f)
-        self.subplot.plot(self.x, self.y)
+        self.subplot.plot(self.x, self.y, color=self.color)
         self.figure.canvas.draw()
         self.subplot.set_ylabel("f(x)")
         self.subplot.set_xlabel("x")

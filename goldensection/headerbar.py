@@ -31,28 +31,22 @@ class Headerbar(Gtk.HeaderBar):
 
         Gtk.HeaderBar.__init__(self)
 
+        self.function = None
         self.set_show_close_button(True)
         self.props.title = cn.App.application_name
 
         # color button
-        self.hbar_color = Gtk.ColorButton.new_with_rgba(Gdk.RGBA(255, 215, 0, 255))
+        self.hbar_color = Gtk.ColorButton.new_with_rgba(Gdk.RGBA(0.20392156862745098, 0.396078431372549, 0.6431372549019608, 1))
+        print("Default color", self.hbar_color.get_rgba().to_string())
         self.hbar_color.connect("color_set", self.on_hbar_color_color_set)
         self.pack_end(self.hbar_color)
 
 
     def on_hbar_color_color_set(self, widget):
-        cn.Colors.primary_color = widget.get_rgba().to_string()
-
-        # There are better methods to define CSS variables, but this is an example.
-        stylesheet = """
-            @define-color colorPrimary """+cn.Colors.primary_color+""";
-            @define-color textColorPrimary """+cn.Colors.primary_text_color+""";
-            @define-color textColorPrimaryShadow """+cn.Colors.primary_text_shadow_color+""";
-        """;
-
-        style_provider = Gtk.CssProvider()
-        style_provider.load_from_data(bytes(stylesheet.encode()))
-        Gtk.StyleContext.add_provider_for_screen(
-            Gdk.Screen.get_default(), style_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-        )
+        print("Color change", widget.get_rgba().to_string())
+        red = widget.get_rgba().red
+        green = widget.get_rgba().green
+        blue = widget.get_rgba().blue
+        print (red, green, blue)
+        self.function.chart.color = (red, green, blue)
+        self.function.update()

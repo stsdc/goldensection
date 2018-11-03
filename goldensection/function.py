@@ -21,7 +21,7 @@ class Function:
         self.update(self.param_a, self.param_b, self.param_c)
 
 
-    def update(self, param_A, param_B, param_C):
+    def update(self, param_A=None, param_B=None, param_C=None):
         print (param_A, param_B, param_C)
 
         if(param_A):
@@ -35,6 +35,9 @@ class Function:
         if(param_C):
             self.param_c = int(param_C)
             self.label_builder(self.param_a, self.param_b, param_C)
+
+        if not param_A and not param_B and not param_B:
+            self.label_builder(self.param_a, self.param_b, self.param_c)
 
         self.label.set_label(self.label_text)
         self.set_func()
