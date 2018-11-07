@@ -29,10 +29,8 @@ class Chart:
         self.subplot.axhline(0, color='#d4d4d4', linestyle='-', linewidth=0.5)
         self.subplot.axvline(0, color='#d4d4d4', linestyle='-', linewidth=0.5)
 
-        print(algorithm.a, algorithm.b)
-
-        self.subplot.axvline(float(a), color='#3689e6', linestyle='--', linewidth=0.5)
-        self.subplot.axvline(float(b), color='#3689e6', linestyle='--', linewidth=0.5)
+        self.subplot.axvline(a, color='#3689e6', linestyle='--', linewidth=0.5)
+        self.subplot.axvline(b, color='#3689e6', linestyle='--', linewidth=0.5)
 
         self.subplot.set_title(function.label_text)
         self.generate_points(function.f)

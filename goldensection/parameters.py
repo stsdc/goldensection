@@ -56,7 +56,8 @@ class Parameters:
         self.frame.set_label("Golden Section Algorithm Parameters")
         self.frame.add(param_grid)
 
-        self.recalculate()
+        self.chart.update(self.function, self.algorithm, self.to_float(self.constrain_a.get_text()), self.to_float(self.constrain_b.get_text()))
+
 
     def on_activate_a(self, widget, event=None):
         self.function.update(widget.get_text(), 0, 0)
@@ -90,11 +91,11 @@ class Parameters:
         self.algorithm.b = self.to_float(self.constrain_b.get_text())
         self.algorithm.find_min()
         self.algorithm.f = self.function.f
-        self.chart.update(self.function, self.algorithm, self.constrain_a.get_text(), self.constrain_b.get_text())
+        self.chart.update(self.function, self.algorithm, self.to_float(self.constrain_a.get_text()), self.to_float(self.constrain_b.get_text()))
 
 
     def to_float(self, string):
-        if not string or (not string.isdigit()):
+        if not string:
             return 0.0
         else:
             return float(string)
