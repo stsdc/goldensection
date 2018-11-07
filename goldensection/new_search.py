@@ -51,9 +51,9 @@ class NewSearch(Gtk.Box):
             _ = str
 
         chart = ch.Chart()
-        self.function = fn.Function(chart)
+        self.function = fn.Function()
         algo = al.Algorithm()
-        algo_parameters = pm.Parameters(self.function, algo)
+        algo_parameters = pm.Parameters(self.function, algo, chart)
         hpaned = Gtk.Paned()
         hpaned.set_position(800)
         hpaned.add1(chart.sw)

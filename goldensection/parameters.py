@@ -2,9 +2,10 @@ from gi.repository import Gtk, Gdk, Granite, GdkPixbuf
 
 
 class Parameters:
-    def __init__(self, function, algorithm):
+    def __init__(self, function, algorithm, chart):
         self.function = function
         self.algorithm = algorithm
+        self.chart = chart
 
         param_a = Gtk.Entry(margin=5)
         param_a.set_tooltip_text("Parameter A")
@@ -55,6 +56,8 @@ class Parameters:
         self.frame.set_label("Golden Section Algorithm Parameters")
         self.frame.add(param_grid)
 
+        self.recalculate()
+
     def on_activate_a(self, widget, event=None):
         self.function.update(widget.get_text(), 0, 0)
         self.recalculate()
@@ -87,6 +90,8 @@ class Parameters:
         self.algorithm.b = self.to_float(self.constrain_b.get_text())
         self.algorithm.find_min()
         self.algorithm.f = self.function.f
+        self.chart.update(self.function, self.algorithm, self.constrain_a.get_text(), self.constrain_b.get_text())
+
 
     def to_float(self, string):
         if not string or (not string.isdigit()):

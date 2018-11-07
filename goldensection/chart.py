@@ -20,15 +20,20 @@ class Chart:
 
         self.f = None
 
-    def update(self, function):
+    def update(self, function, algorithm, a, b):
         self.f = function
         if not function:
             function = self.f
-        print("CHART", self.color)
-        self.del_points()
-        self.subplot.clear()
-        self.subplot.axhline(0, color='#d4d4d4', linestyle='--')
-        self.subplot.axvline(0, color='#d4d4d4', linestyle='--')
+        self.clear_plot()
+
+        self.subplot.axhline(0, color='#d4d4d4', linestyle='-', linewidth=0.5)
+        self.subplot.axvline(0, color='#d4d4d4', linestyle='-', linewidth=0.5)
+
+        print(algorithm.a, algorithm.b)
+
+        self.subplot.axvline(float(a), color='#3689e6', linestyle='--', linewidth=0.5)
+        self.subplot.axvline(float(b), color='#3689e6', linestyle='--', linewidth=0.5)
+
         self.subplot.set_title(function.label_text)
         self.generate_points(function.f)
         self.subplot.plot(self.x, self.y, color=self.color)
@@ -44,7 +49,8 @@ class Chart:
             self.x.append(x)
             self.y.append(f(x))
 
-    def del_points(self):
+    def clear_plot(self):
         print("Deleting points")
         self.x = []
         self.y = []
+        self.subplot.clear()

@@ -2,11 +2,10 @@ from gi.repository import Gtk, Gdk, Granite, GdkPixbuf
 
 
 class Function:
-    def __init__(self, chart):
+    def __init__(self):
         self.label = Gtk.Label()
         self.label_text = ""
 
-        self.chart = chart
 
         self.frame = Gtk.Frame(margin=20)
         self.frame.set_label("The function")
@@ -41,7 +40,6 @@ class Function:
 
         self.label.set_label(self.label_text)
         self.set_func()
-        self.chart.update(self)
         print("Extrema:", -self.param_b / (2 * self.param_a))
 
 
