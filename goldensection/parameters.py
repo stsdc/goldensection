@@ -58,6 +58,7 @@ class Parameters:
 
         self.chart.update(self.function, self.algorithm, self.to_float(self.constrain_a.get_text()), self.to_float(self.constrain_b.get_text()))
 
+        self.recalculate()
 
     def on_activate_a(self, widget, event=None):
         self.function.update(widget.get_text(), 0, 0)

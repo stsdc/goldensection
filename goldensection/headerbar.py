@@ -31,7 +31,7 @@ class Headerbar(Gtk.HeaderBar):
 
         Gtk.HeaderBar.__init__(self)
 
-        self.function = None
+        self.parameters = None
         self.set_show_close_button(True)
         self.props.title = cn.App.application_name
 
@@ -48,5 +48,5 @@ class Headerbar(Gtk.HeaderBar):
         green = widget.get_rgba().green
         blue = widget.get_rgba().blue
         print (red, green, blue)
-        self.function.chart.color = (red, green, blue)
-        self.function.update()
+        self.parameters.chart.color = (red, green, blue)
+        self.parameters.recalculate()
