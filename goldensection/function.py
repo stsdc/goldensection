@@ -17,7 +17,7 @@ class Function:
 
         self.f = lambda x: self.param_a*x*x + self.param_b*x + self.param_c
 
-        self.extremax = round((-self.param_b / (2 * self.param_a)), 2)
+        self.extremax = round((-self.param_b / (2 * self.param_a)), 3)
         self.extremay = self.f(self.extremax)
 
         self.update(self.param_a, self.param_b, self.param_c)
@@ -43,7 +43,7 @@ class Function:
 
         self.label.set_label(self.label_text)
         self.set_func()
-        self.extremax = round((-self.param_b / (2 * self.param_a)), 2)
+        self.extremax = round((-self.param_b / (2 * self.param_a)), 3)
         self.extremay = self.f(self.extremax)
 
 
