@@ -29,7 +29,8 @@ from gi.repository import Gtk, Gdk, Granite, GdkPixbuf
 try:
     import constants as cn
     import chart as ch
-    import parameters as pm
+    import algorithm_parameters as apm
+    import function_parameters as fpm
     import function as fn
     import algorithm as al
 except ImportError:
@@ -53,13 +54,15 @@ class NewSearch(Gtk.Box):
         chart = ch.Chart()
         self.function = fn.Function()
         algo = al.Algorithm()
-        self.parameters = pm.Parameters(self.function, algo, chart)
+        self.algo_parameters = apm.AlgorithmParameters(self.function, algo, chart)
+        self.func_parameters = fpm.FunctionParameters(self.function, algo, chart)
         hpaned = Gtk.Paned()
         hpaned.set_position(800)
         hpaned.add1(chart.sw)
 
         vbox = Gtk.VBox()
-        vbox.add(self.parameters.frame)
+        vbox.add(self.algo_parameters.frame)
+        vbox.add(self.func_parameters.frame)
         vbox.add(self.function.frame)
 
 

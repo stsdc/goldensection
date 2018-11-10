@@ -1,29 +1,15 @@
 from gi.repository import Gtk, Gdk, Granite, GdkPixbuf
 
 
-class Parameters:
+class AlgorithmParameters:
     def __init__(self, function, algorithm, chart):
         self.function = function
         self.algorithm = algorithm
         self.chart = chart
 
-        param_a = Gtk.Entry(margin=5)
-        param_a.set_tooltip_text("Parameter A")
-        param_a.set_placeholder_text("Parameter A")
-        param_a.set_text(str(self.function.param_a))
-        param_a.connect("changed", self.on_activate_a)
-
-        param_b = Gtk.Entry(margin=5)
-        param_b.set_tooltip_text("Parameter B")
-        param_b.set_placeholder_text("Parameter B")
-        param_b.set_text(str(self.function.param_b))
-        param_b.connect("changed", self.on_activate_b)
-
-        param_c = Gtk.Entry(margin=5)
-        param_c.set_tooltip_text("Parameter C")
-        param_c.set_placeholder_text("Parameter C")
-        param_c.set_text(str(self.function.param_c))
-        param_c.connect("changed", self.on_activate_c)
+        label_a = Gtk.Label("Left guess", margin=5)
+        label_b = Gtk.Label("Right guess", margin=5)
+        label_tol = Gtk.Label("Tolerance", margin=5)
 
         self.constrain_a = Gtk.Entry(margin=5)
         self.constrain_a.set_tooltip_text("Constrain a")
@@ -44,9 +30,10 @@ class Parameters:
         tolerance.connect("changed", self.on_activate_tolerance)
 
         param_grid = Gtk.Grid()
-        param_grid.attach(param_a, 0, 0, 1, 1)
-        param_grid.attach(param_b, 0, 1, 1, 1)
-        param_grid.attach(param_c, 0, 2, 1, 1)
+
+        param_grid.attach(label_a, 0, 0, 1, 1)
+        param_grid.attach(label_b, 0, 1, 1, 1)
+        param_grid.attach(label_tol, 0, 2, 1, 1)
 
         param_grid.attach(self.constrain_a, 1, 0, 1, 1)
         param_grid.attach(self.constrain_b, 1, 1, 1, 1)
@@ -58,18 +45,6 @@ class Parameters:
 
         self.chart.update(self.function, self.algorithm, self.to_float(self.constrain_a.get_text()), self.to_float(self.constrain_b.get_text()))
 
-        self.recalculate()
-
-    def on_activate_a(self, widget, event=None):
-        self.function.update(widget.get_text(), 0, 0)
-        self.recalculate()
-
-    def on_activate_b(self, widget, event=None):
-        self.function.update(0, widget.get_text(), 0)
-        self.recalculate()
-
-    def on_activate_c(self, widget, event=None):
-        self.function.update(0, 0, widget.get_text())
         self.recalculate()
 
     def on_activate_constrain_a(self, widget, event=None):

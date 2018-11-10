@@ -21,10 +21,15 @@ class Chart:
 
         self.f = None
 
-    def update(self, function, algorithm, a, b):
+    def update(self, function, algorithm, a=None, b=None):
         self.f = function
         if not function:
             function = self.f
+
+        if not a:
+            a = algorithm.a
+        if not b:
+            b = algorithm.b
         self.clear_plot()
         self.generate_points(function.f)
 
