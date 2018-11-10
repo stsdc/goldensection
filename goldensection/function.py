@@ -1,15 +1,17 @@
-from gi.repository import Gtk, Gdk, Granite, GdkPixbuf
+from gi.repository import Gtk, Gdk, Granite, GdkPixbuf, GObject
 
+class Function(GObject.GObject):
 
-class Function:
+    __gsignals__ = {
+        'update': (GObject.SIGNAL_RUN_FIRST, None, (str,))
+    }
     def __init__(self):
-        self.label = Gtk.Label()
+        GObject.Object.__init__(self)
         self.label_text = ""
 
 
         self.frame = Gtk.Frame(margin=20)
         self.frame.set_label("The function")
-        self.frame.add(self.label)
 
         self.param_a = 4
         self.param_b = 2
@@ -19,6 +21,8 @@ class Function:
 
         self.extremax = round((-self.param_b / (2 * self.param_a)), 3)
         self.extremay = self.f(self.extremax)
+
+
 
         self.update(self.param_a, self.param_b, self.param_c)
 
@@ -41,7 +45,8 @@ class Function:
         if not param_A and not param_B and not param_B:
             self.label_builder(self.param_a, self.param_b, self.param_c)
 
-        self.label.set_label(self.label_text)
+        self.emit("update", self.label_text)
+
         self.set_func()
         self.extremax = round((-self.param_b / (2 * self.param_a)), 3)
         self.extremay = self.f(self.extremax)

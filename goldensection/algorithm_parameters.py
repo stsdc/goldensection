@@ -8,8 +8,11 @@ class AlgorithmParameters:
         self.chart = chart
 
         label_a = Gtk.Label("Left guess", margin=5)
+        label_a.set_justify(Gtk.Justification.LEFT)
         label_b = Gtk.Label("Right guess", margin=5)
+        label_b.set_justify(Gtk.Justification.LEFT)
         label_tol = Gtk.Label("Tolerance", margin=5)
+        label_tol.set_justify(Gtk.Justification.LEFT)
 
         self.constrain_a = Gtk.Entry(margin=5)
         self.constrain_a.set_tooltip_text("Constrain a")

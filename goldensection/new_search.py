@@ -31,6 +31,7 @@ try:
     import chart as ch
     import algorithm_parameters as apm
     import function_parameters as fpm
+    import result as rsl
     import function as fn
     import algorithm as al
 except ImportError:
@@ -56,6 +57,8 @@ class NewSearch(Gtk.Box):
         algo = al.Algorithm()
         self.algo_parameters = apm.AlgorithmParameters(self.function, algo, chart)
         self.func_parameters = fpm.FunctionParameters(self.function, algo, chart)
+        self.result = rsl.Result(self.function)
+        # self.result.update(self.function, algo)
         hpaned = Gtk.Paned()
         hpaned.set_position(800)
         hpaned.add1(chart.sw)
@@ -63,7 +66,7 @@ class NewSearch(Gtk.Box):
         vbox = Gtk.VBox()
         vbox.add(self.algo_parameters.frame)
         vbox.add(self.func_parameters.frame)
-        vbox.add(self.function.frame)
+        vbox.add(self.result.frame)
 
 
 
