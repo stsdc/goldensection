@@ -8,29 +8,36 @@ class Algorithm:
         self.a = -5
         self.b = 5
 
-        self.c = self.b - (self.b - self.a) / self.golden
-        self.d = self.a + (self.b - self.a) / self.golden
+        self.tempa = self.a
+        self.tempb = self.b
+
+        self.set_cd()
 
         self.f = lambda x: 4*x*x + 2*x + 6
 
 
     def step(self):
         if self.f(self.c) < self.f(self.d):
-            self.b = self.d
+            self.tempb = self.d
             self.d = self.c
-            self.c = self.b - (self.b - self.a)/self.golden
+            self.c = self.tempb - (self.tempb - self.tempa)/self.golden
         else:
-            self.a = self.c
+            self.tempa = self.c
             self.c = self.d
-            self.d = self.a + (self.b - self.a) / self.golden
+            self.d = self.tempa + (self.tempb - self.tempa) / self.golden
 
         print(self.d, self.c)
 
 
     def find_min(self):
-        self.c = self.b - (self.b - self.a) / self.golden
-        self.d = self.a + (self.b - self.a) / self.golden
+        self.set_cd()
         if(self.tolerance > 0):
-            while (abs(self.b - self.a) > self.tolerance):
+            while (abs(self.tempb - self.tempa) > self.tolerance):
                 self.step()
+            self.tempa = self.a
+            self.tempb = self.b
             return (self.d, self.c)
+
+    def set_cd(self):
+        self.c = self.tempb - (self.tempb - self.tempa) / self.golden
+        self.d = self.tempa + (self.tempb - self.tempa) / self.golden
