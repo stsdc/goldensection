@@ -1,7 +1,12 @@
 import math
+from gi.repository import GObject
 
-class Algorithm:
+class Algorithm(GObject.GObject):
+    __gsignals__ = {
+        'update': (GObject.SIGNAL_RUN_FIRST, None, (float,float,))
+    }
     def __init__(self):
+        GObject.Object.__init__(self)
         self.golden  = (math.sqrt(5.0) + 1.0)/2
         self.tolerance = 0.01
 
@@ -36,7 +41,7 @@ class Algorithm:
                 self.step()
             self.tempa = self.a
             self.tempb = self.b
-            return (self.d, self.c)
+            self.emit("update", self.c, self.d)
 
     def set_cd(self):
         self.c = self.tempb - (self.tempb - self.tempa) / self.golden
