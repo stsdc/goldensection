@@ -43,6 +43,15 @@ class Algorithm(GObject.GObject):
             self.tempb = self.b
             self.emit("update", self.c, self.d)
 
+    def find_min_step(self):
+        self.set_cd()
+        if(self.tolerance > 0):
+            if (abs(self.tempb - self.tempa) > self.tolerance):
+                self.step()
+            self.tempa = self.a
+            self.tempb = self.b
+            self.emit("update", self.c, self.d)
+
     def set_cd(self):
         self.c = self.tempb - (self.tempb - self.tempa) / self.golden
         self.d = self.tempa + (self.tempb - self.tempa) / self.golden

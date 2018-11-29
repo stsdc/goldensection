@@ -41,6 +41,18 @@ class Headerbar(Gtk.HeaderBar):
         self.hbar_color.connect("color_set", self.on_hbar_color_color_set)
         self.pack_end(self.hbar_color)
 
+        self.switch = Gtk.Switch()
+        self.switch.connect("notify::active", self.on_switch_activated)
+        self.switch.set_active(False)
+        self.switch.set_tooltip_text("Enable step-by-step mode")
+        self.pack_end(self.switch)
+
+        self.next_step_button = Gtk.Button.new_with_label("Next step")
+        self.next_step_button.connect("clicked", self.on_next_step_button_clicked)
+        self.pack_end(self.next_step_button)
+        self.next_step_button.set_sensitive(False)
+
+
 
     def on_hbar_color_color_set(self, widget):
         print("Color change", widget.get_rgba().to_string())
@@ -50,3 +62,12 @@ class Headerbar(Gtk.HeaderBar):
         print (red, green, blue)
         self.parameters.chart.color = (red, green, blue)
         self.parameters.recalculate()
+
+    def on_switch_activated(self, switch, gparam):
+        if switch.get_active():
+            self.next_step_button.set_sensitive(True)
+        else:
+            self.next_step_button.set_sensitive(False)
+
+    def on_next_step_button_clicked(self, button):
+        print('yay')
