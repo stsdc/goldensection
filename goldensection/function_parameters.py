@@ -7,6 +7,8 @@ class FunctionParameters:
         self.algorithm = algorithm
         self.chart = chart
 
+        self.isStepByStepModeActive = False
+
         label_a = Gtk.Label("Parameter A", margin=5)
         label_b = Gtk.Label("Parameter B", margin=5)
         label_c = Gtk.Label("Parameter C", margin=5)
@@ -59,8 +61,15 @@ class FunctionParameters:
         self.recalculate()
 
     def recalculate(self):
-        self.algorithm.find_min()
+        if self.isStepByStepModeActive:
+            self.algorithm.find_min_step()
+        else:
+            self.algorithm.find_min()
+
         self.algorithm.f = self.function.f
+        self.update_chart()
+
+    def update_chart(self):
         self.chart.update(self.function, self.algorithm)
 
 

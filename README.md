@@ -2,7 +2,8 @@
 
 Based on [Python template for elementaryOS](https://gitlab.com/brombinmirko/ElementaryPython)
 
-_Please don't judge me by this code 😅_
+![GoldenSection Screenshot](https://github.com/stsdc/goldensection/raw/master/data/com.github.stsdc.goldensection.screenshot.png)
+
 
 ## Requirements
 - python3

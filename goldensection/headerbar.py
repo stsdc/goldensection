@@ -31,7 +31,8 @@ class Headerbar(Gtk.HeaderBar):
 
         Gtk.HeaderBar.__init__(self)
 
-        self.parameters = None
+        self.func_parameters = None
+        self.algo_parameters = None
         self.set_show_close_button(True)
         self.props.title = cn.App.application_name
 
@@ -52,6 +53,11 @@ class Headerbar(Gtk.HeaderBar):
         self.pack_end(self.next_step_button)
         self.next_step_button.set_sensitive(False)
 
+        self.reset_button = Gtk.Button.new_with_label("Reset")
+        self.reset_button.connect("clicked", self.on_reset_button_clicked)
+        self.pack_end(self.reset_button)
+        self.reset_button.set_sensitive(False)
+
 
 
     def on_hbar_color_color_set(self, widget):
@@ -60,14 +66,23 @@ class Headerbar(Gtk.HeaderBar):
         green = widget.get_rgba().green
         blue = widget.get_rgba().blue
         print (red, green, blue)
-        self.parameters.chart.color = (red, green, blue)
-        self.parameters.recalculate()
+        self.func_parameters.chart.color = (red, green, blue)
+        self.func_parameters.recalculate()
 
     def on_switch_activated(self, switch, gparam):
         if switch.get_active():
             self.next_step_button.set_sensitive(True)
+            self.reset_button.set_sensitive(True)
+            self.func_parameters.isStepByStepModeActive = True
+            self.algo_parameters.isStepByStepModeActive = True
         else:
             self.next_step_button.set_sensitive(False)
-
+            self.reset_button.set_sensitive(False)
+            self.func_parameters.isStepByStepModeActive = False
+            self.algo_parameters.isStepByStepModeActive = False
     def on_next_step_button_clicked(self, button):
-        print('yay')
+        self.func_parameters.recalculate()
+
+    def on_reset_button_clicked(self, button):
+        self.func_parameters.algorithm.reset()
+        self.func_parameters.update_chart()

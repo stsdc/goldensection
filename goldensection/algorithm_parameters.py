@@ -7,6 +7,8 @@ class AlgorithmParameters:
         self.algorithm = algorithm
         self.chart = chart
 
+        self.isStepByStepModeActive = False
+
         label_a = Gtk.Label("Left guess", margin=5)
         label_a.set_justify(Gtk.Justification.LEFT)
         label_b = Gtk.Label("Right guess", margin=5)
@@ -68,7 +70,13 @@ class AlgorithmParameters:
     def recalculate(self):
         self.algorithm.a = self.to_float(self.constrain_a.get_text())
         self.algorithm.b = self.to_float(self.constrain_b.get_text())
-        self.algorithm.find_min()
+
+        print('SelfModeState', self.isStepByStepModeActive)
+        if self.isStepByStepModeActive:
+            self.algorithm.find_min_step()
+        else:
+            self.algorithm.find_min()
+
         self.algorithm.f = self.function.f
         self.chart.update(self.function, self.algorithm, self.to_float(self.constrain_a.get_text()), self.to_float(self.constrain_b.get_text()))
 

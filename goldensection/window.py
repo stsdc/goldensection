@@ -35,5 +35,6 @@ class Window(Gtk.Window):
         self.set_titlebar(hbar)
 
         self.stack = sk.Stack(self)
-        hbar.parameters = self.stack.new_search.func_parameters
+        hbar.func_parameters = self.stack.new_search.func_parameters
+        hbar.algo_parameters = self.stack.new_search.algo_parameters
         self.add(self.stack)
