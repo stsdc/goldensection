@@ -4,7 +4,7 @@ from gi.repository import GObject
 
 class Algorithm(GObject.GObject):
     __gsignals__ = {
-        'update': (GObject.SIGNAL_RUN_FIRST, None, (float, float,))
+        'update': (GObject.SIGNAL_RUN_FIRST, None, (float, float, int))
     }
 
     def __init__(self):
@@ -22,7 +22,10 @@ class Algorithm(GObject.GObject):
 
         self.f = lambda x: 4 * x * x + 2 * x + 6
 
+        self.step_iter = 0
+
     def step(self):
+        self.step_iter =+ 1
         if self.f(self.c) < self.f(self.d):
             self.tempb = self.d
             self.d = self.c
@@ -41,7 +44,7 @@ class Algorithm(GObject.GObject):
                 self.step()
             self.tempa = self.a
             self.tempb = self.b
-            self.emit("update", self.c, self.d)
+            self.emit("update", self.c, self.d, self.step_iter)
 
     def find_min_step(self):
         print("FIND MIN STEP")
@@ -50,9 +53,10 @@ class Algorithm(GObject.GObject):
         if(self.tolerance > 0):
             if (abs(self.tempb - self.tempa) > self.tolerance):
                 self.step()
-            self.emit("update", self.c, self.d)
+            self.emit("update", self.c, self.d, self.step_iter)
 
     def reset(self):
+        self.step_iter = 0
         self.tempa = self.a
         self.tempb = self.b
         self.set_cd()
