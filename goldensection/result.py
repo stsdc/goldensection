@@ -32,5 +32,5 @@ class Result:
         self.func_label.set_label(text)
 
     def update_algo(self, arg, c, d):
-        self.range_l_label.set_label(str(c))
-        self.range_r_label.set_label(str(d))
+        self.range_l_label.set_label(str(round(c, 3)))
+        self.range_r_label.set_label(str(round(d, 3)))
