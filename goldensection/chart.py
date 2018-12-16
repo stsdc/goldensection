@@ -55,7 +55,7 @@ class Chart:
         self.subplot.set_ylabel("f(x)")
         self.subplot.set_xlabel("x")
 
-        # self.subplot.set_ylim(function.extremay - function.extremay * 10, self.y[-1] - 10)
+        self.subplot.set_xlim(a - 1, b + 1)
 
         # self.subplot.set_autoscaley_on(False)
         self.figure.canvas.draw()
