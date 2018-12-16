@@ -25,7 +25,7 @@ class Algorithm(GObject.GObject):
         self.step_iter = 0
 
     def step(self):
-        self.step_iter =+ 1
+        self.step_iter = self.step_iter + 1
         if self.f(self.c) < self.f(self.d):
             self.tempb = self.d
             self.d = self.c
@@ -35,7 +35,7 @@ class Algorithm(GObject.GObject):
             self.c = self.d
             self.d = self.tempa + (self.tempb - self.tempa) / self.golden
 
-        print(self.d, self.c)
+        print(self.d, self.c, self.step_iter)
 
     def find_min(self):
         self.set_cd()
@@ -45,6 +45,7 @@ class Algorithm(GObject.GObject):
             self.tempa = self.a
             self.tempb = self.b
             self.emit("update", self.c, self.d, self.step_iter)
+            self.step_iter = 0
 
     def find_min_step(self):
         print("FIND MIN STEP")
@@ -54,6 +55,7 @@ class Algorithm(GObject.GObject):
             if (abs(self.tempb - self.tempa) > self.tolerance):
                 self.step()
             self.emit("update", self.c, self.d, self.step_iter)
+            self.step_iter = 0
 
     def reset(self):
         self.step_iter = 0
